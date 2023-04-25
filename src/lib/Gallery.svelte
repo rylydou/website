@@ -8,7 +8,7 @@
 	let opened = items[0]
 	$: unopened_items = items.filter(({ id }) => opened.id !== id)
 
-	const [send, receive] = crossfade({ duration: 400, easing: ease })
+	const [send, receive] = crossfade({ duration: 1000, easing: ease })
 </script>
 
 {#each [opened] as _ (opened.id)}
@@ -40,14 +40,15 @@
 <style lang="postcss">
 	.gallery {
 		display: grid;
-		grid-template-columns: repeat(5, 200px);
-		grid-template-rows: repeat(4, 200px);
+		grid-template-columns: repeat(5, 100px);
+		grid-template-rows: repeat(4, 1fr);
 	}
 
 	.main {
 		grid-column: 1 / 5;
 		grid-row: 1 / 4;
 		object-fit: cover;
+		z-index: 1;
 	}
 
 	.main > img {
