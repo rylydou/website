@@ -1,5 +1,11 @@
 <script>
 	import '../app.css'
+
+	import '@fontsource/fira-sans'
+	import '@fontsource/fira-sans/800.css'
+	import '@fontsource/roboto-slab'
+	import '@fontsource/roboto-slab/800.css'
+	import '@fontsource/fira-mono'
 </script>
 
 <a

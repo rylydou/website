@@ -23,7 +23,7 @@
 
 <section class="grid place-items-center pt-8">
 	<div
-		class="max-w-screen-sm select-text prose prose-neutral prose-pre:bg-neutral-200 prose-pre:text-black prose-pre:rounded-none"
+		class="max-w-screen-sm select-text prose prose-neutral prose-pre:bg-neutral-200 prose-pre:text-black prose-pre:rounded-none prose-headings:font-display"
 	>
 		<h1> Lorem ipsum dolor sit amet </h1>
 

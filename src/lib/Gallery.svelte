@@ -2,17 +2,13 @@
 	import { crossfade } from 'svelte/transition'
 	import { flip } from 'svelte/animate'
 	import { quintOut as ease } from 'svelte/easing'
-	import { trusted } from 'svelte/internal'
-
-	import { FastAverageColor } from 'fast-average-color'
-	const fac = new FastAverageColor()
+	import { onDestroy, onMount } from 'svelte'
 
 	export let items: any[] = []
 
 	let is_expanded = false
-	let current_color = '#000000'
-
-	const [send, receive] = crossfade({ duration: 400, easing: ease })
+	let next_auto_index = 0
+	let is_auto_paused = false
 
 	function select(item: any): void {
 		let index = items.indexOf(item)
@@ -21,35 +17,44 @@
 			return
 		}
 
-		if (!item.color) {
-			fac.getColorAsync(item.src).then((color) => {
-				item.color = color.hex
-				current_color = item.color
-			})
-		} else {
-			current_color = item.color
-		}
-
 		let previous = items[0]
 
 		items[0] = item
 		items[index] = previous
 		items = items
 	}
+
+	let interval_handle: NodeJS.Timer
+	onMount(() => {
+		interval_handle = setInterval(() => {
+			if (is_auto_paused) return
+
+			next_auto_index += 1
+			if (next_auto_index >= items.length) {
+				next_auto_index = 1
+			}
+
+			select(items[next_auto_index])
+		}, 3000)
+	})
+
+	onDestroy(() => {
+		clearInterval(interval_handle)
+	})
 </script>
 
 <div class="gallery gap-2" class:expanded={is_expanded}>
 	{#each items as item (item.id)}
 		<button
 			class="item"
-			style="--c: {'#000000'};"
-			on:click={() => select(item)}
-			animate:flip={{ duration: 400, easing: ease }}
-			in:receive={{ key: item.id }}
-			out:send={{ key: item.id }}
+			on:click={() => {
+				is_auto_paused = true
+				select(item)
+			}}
+			animate:flip={{ duration: 800, easing: ease }}
 		>
 			<img id="img" src={item.src} alt={item.alt || ':('} draggable="false" />
-			<div class="desc font-bold">
+			<div class="desc font-bold font-display">
 				Lorem ipsum dolor sit amet consectetur.
 			</div>
 		</button>
@@ -66,8 +71,7 @@
 	.item {
 		cursor: pointer;
 		will-change: transform;
-		/* position: relative; */
-		background-color: var(--c);
+		background-color: black;
 	}
 
 	.item > .desc {
@@ -81,7 +85,7 @@
 		padding: 0.75rem 1.25rem;
 		text-shadow: 0 0 4px black;
 		text-align: left;
-		//background-image: linear-gradient(to top, black, transparent);
+		/*background-image: linear-gradient(to top, black, transparent);*/
 	}
 
 	.item > img {

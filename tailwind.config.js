@@ -4,8 +4,8 @@ export default {
 	theme: {
 		fontFamily: {
 			normal: ['Fira sans', 'sans-serif'],
-			display: ['Fira sans', 'serif'],
-			mono: ['Fira mono', 'mono'],
+			display: ['Roboto slab', 'serif'],
+			mono: ['Fira mono', 'monospace'],
 		},
 		extend: {
 			screens: {
