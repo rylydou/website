@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
+		"@tailwindcss/typography": "^0.5.9",
 		"autoprefixer": "^10.4.14",
 		"postcss": "^8.4.23",
 		"svelte": "^3.54.0",
@@ -23,7 +24,13 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/fira-code": "^4.5.13",
+		"@fontsource/fira-mono": "^4.5.10",
+		"@fontsource/fira-sans": "^4.5.10",
+		"@fontsource/roboto-serif": "^4.5.12",
+		"@fontsource/roboto-slab": "^4.5.11",
 		"chroma-js": "^2.4.2",
+		"extract-colors": "^3.0.0",
 		"fast-average-color": "^9.3.0",
 		"node-vibrant": "^3.2.1-alpha.1"
 	}

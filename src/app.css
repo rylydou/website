@@ -5,3 +5,7 @@
 html {
 	user-select: none;
 }
+
+::selection {
+	@apply bg-yellow-400 text-black;
+}

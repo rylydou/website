@@ -2,7 +2,18 @@
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {},
+		fontFamily: {
+			normal: ['Fira sans', 'sans-serif'],
+			display: ['Fira sans', 'serif'],
+			mono: ['Fira mono', 'mono'],
+		},
+		extend: {
+			screens: {
+				'md': '840px',
+			}
+		},
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/typography'),
+	],
 }
