@@ -59,11 +59,13 @@
 			animate:flip={{ duration: 800, easing: ease }}
 		>
 			<img id="img" src={item.src} draggable="false" />
-			<div class="desc md:text-xl font-bold font-display">
-				<span class="bg-black px-2 pb-0.5">
-					Lorem ipsum dolor sit amet consectetur.
-				</span>
-			</div>
+			{#if item.desc}
+				<div class="desc md:text-xl font-bold font-display">
+					<span class="bg-black px-2 pb-0.5">
+						{item.desc}
+					</span>
+				</div>
+			{/if}
 		</button>
 	{/each}
 
@@ -86,6 +88,7 @@
 		cursor: pointer;
 		will-change: transform;
 		background-color: black;
+		aspect-ratio: 1 / 1;
 	}
 
 	.item > .desc {
@@ -112,7 +115,10 @@
 
 		z-index: 1;
 		grid-column: 1 / span 4;
-		grid-row: 1 / span 3;
+		grid-row: 1 / span 4;
+		aspect-ratio: 4 / 4;
+
+		outline: solid 1px gray;
 	}
 
 	.item:first-child > .desc {

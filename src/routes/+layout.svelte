@@ -2,10 +2,12 @@
 	import '$lib/styles/index.css'
 
 	import '@fontsource/fira-sans'
+	import '@fontsource/fira-sans/500.css'
 	import '@fontsource/fira-sans/800.css'
 	import '@fontsource/roboto-slab'
 	import '@fontsource/roboto-slab/900.css'
 	import '@fontsource/fira-mono/500.css'
+	import '@fontsource/noto-serif'
 
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'
@@ -30,32 +32,31 @@
 	<slot />
 </article>
 
-<footer class="py-12 bg-black text-white flex justify-center font-bold">
-	<div class="w-full max-w-screen-sm flex flex-row justify-between">
-		<ul>
+<footer class="py-12 px-4 bg-black text-white flex justify-center font-bold">
+	<div
+		class="w-full max-w-screen-sm flex flex-row justify-between flex-wrap gap-4 text-right sm:text-left"
+	>
+		<ul class="text-red-400">
 			<li><h1>Pages</h1></li>
 			<li><a href="/">Home</a></li>
 			<li><a href="/blog">Blog</a></li>
-			<li><a href="">About</a></li>
+			<li><a href="/about">About</a></li>
 		</ul>
-		<ul>
+		<ul class="text-yellow-400">
 			<li><h1>Works</h1></li>
-			<li><a href="">Games</a></li>
-			<li><a href="">Sites</a></li>
-			<li><a href="">Apps</a></li>
+			<li><a href="https://ciber-turtle.itch.io">Games</a></li>
+			<li><a href="/art">Art</a></li>
 		</ul>
-		<ul>
+		<ul class="text-lime-400">
 			<li><h1>Links</h1></li>
-			<li><a href="">Twitter</a></li>
-			<li><a href="">Itch</a></li>
-			<li><a href="">Youtube</a></li>
-			<li><a href="">Github</a></li>
+			<li><a href="https://github.com/CiberTurtle">Github</a></li>
+			<li><a href="https://ciber-turtle.itch.io">Itch.io</a></li>
+			<li><a href="#">Twitter</a></li>
+			<li><a href="#">Youtube</a></li>
 		</ul>
-		<ul>
+		<ul class="text-sky-400">
 			<li><h1>Extras</h1></li>
-			<li><a href="">Terms</a></li>
-			<li><a href="">Status</a></li>
-			<li><a href="">Docs</a></li>
+			<li><a href="#" on:click={() => (window.scrollY = 0)}>Back to top</a></li>
 		</ul>
 	</div>
 </footer>
@@ -69,45 +70,38 @@
 		@apply px-4 py-2
 			text-lg md:text-2xl
 			font-extrabold font-display
-			bg-black text-white
-			hover:bg-white hover:text-black;
+			bg-black text-white;
 	}
 
 	.logo:hover {
-		box-shadow: inset 0 0 0 0.25rem black;
+		@apply underline underline-offset-2
+			/* bg-white text-black; */;
+		text-decoration-thickness: 2px;
+		/* box-shadow: inset 0 0 0 0.125rem black; */
 	}
 
 	footer h1 {
-		@apply font-extrabold text-xl font-display;
+		@apply font-extrabold text-xl font-display text-white;
 	}
 
-	footer a {
+	footer ul a {
 		position: relative;
 
-		@apply text-yellow-400
-			/* hover:underline; */;
+		/* @apply text-yellow-400; */
 	}
 
-	footer li:not(:first-child):hover:before,
-	footer li:not(:first-child):hover:after {
-		/* content: '+';
-		position: absolute; */
-		list-style: '+ ';
-		list-style-position: inside;
-	}
-
-	footer a:hover:before,
-	footer a:hover:after {
+	footer ul a:hover:before,
+	footer ul a:hover:after {
 		content: '-';
 		position: absolute;
 		bottom: -4px;
 	}
 
-	footer a::before {
+	footer ul a::before {
 		left: -0.75em;
 	}
 
-	footer a::after {
+	footer ul a::after {
 		right: -0.75em;
 	}
 </style>

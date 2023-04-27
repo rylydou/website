@@ -3,21 +3,43 @@
 	import { getContext } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
+	import img_car_1 from './static/car-1.jpeg'
+	import img_car_2 from './static/car-2.jpeg'
+	import img_parrot_1 from './static/parrot-1.jpeg'
+	import img_stacker_1 from './static/stacker-1.png'
+	import img_stacker_2 from './static/stacker-2.png'
+	import img_burger_stack from './static/burger-stack.png'
+
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
 
-	async function generate_placeholder_images(count: number): Promise<any[]> {
-		let arr: any[] = []
-		for (let index = 1; index < count + 1; index++) {
-			arr.push({
-				id: index,
-				src: `https://picsum.photos/seed/${index}/1600/900`,
-			})
-		}
-		return arr
-	}
-	let items: any[] = []
-	generate_placeholder_images(9).then((arr) => (items = arr))
+	let items: any[] = [
+		{
+			id: 1,
+			src: img_parrot_1,
+			desc: 'The pixel parrot',
+		},
+		{
+			id: 2,
+			src: img_car_1,
+			desc: 'The stacker slacker 1',
+		},
+		{
+			id: 3,
+			src: img_car_2,
+			desc: 'The stacker slacker 2',
+		},
+		{
+			id: 4,
+			src: img_stacker_1,
+			desc: 'The stacker slacker CAD model',
+		},
+		{
+			id: 5,
+			src: img_stacker_2,
+			desc: 'The sprite stacker tool',
+		},
+	]
 </script>
 
 <div class="mt-0 pt-0 w-full h-96 relative">
@@ -28,75 +50,56 @@
 	<div
 		class="absolute top-0 left-0 w-full h-full grid place-items-center text-white"
 	>
-		<div class="flex flex-col gap-1 items-end">
-			<span
-				class="bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl md:text-6xl"
+		<div class="flex flex-col gap-2 w-full max-w-screen-sm">
+			<div
+				class="self-start bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl md:text-6xl"
 			>
 				Studio Art 2023
-			</span>
-			<span class="select-text font-bold px-6 bg-black text-base md:text-2xl">
-				Sophomore Year Semester 2
-			</span>
+			</div>
+			<div
+				class="self-end select-text font-bold px-6 bg-black text-base md:text-2xl"
+			>
+				Too many rabbit holes, not enough rabbits.
+			</div>
 		</div>
 	</div>
 </div>
 
 <section>
 	<div class="prose">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quaerat
-		sapiente cupiditate molestias ad corporis soluta, minus eligendi voluptates
-		explicabo natus! Adipisci ipsa magni facilis accusamus ratione porro
-		incidunt dolore.
+		<p>
+			The theme I choose for this year was <a
+				href="https://en.wikipedia.org/wiki/Computer_graphics"
+				target="_blank"><strong>Computer Graphics</strong></a
+			>. Although it isn't really a theme in the sense of things like
+			<em>underwater</em> or <em>darkness</em>, it's still a good starting point
+			for finding inspiration. There are many different things that relate to
+			the topic and interesting patterns can arise from how technology works.
+		</p>
+
+		<p>Here's just a peak at some of the ideas you can get form this topic:</p>
+		<ul>
+			<li>How display technology works: Pixel and liquid crystals</li>
+			<li>Minecraft: Procedural generation, voxels (3d pixels) </li>
+		</ul>
+	</div>
+</section>
+
+<section class="">
+	<div class="prose">
+		<p>Here's a quick gallery of the things I made this year:</p>
 	</div>
 	<Gallery {items} />
+</section>
+
+<section class="">
 	<div class="prose">
-		<h1> Lorem ipsum dolor sit amet </h1>
-
 		<p
-			><strong>Pellentesque habitant morbi tristique</strong> senectus et netus
-			et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-			vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
-			quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris
-			placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
-			pharetra. Vestibulum erat wisi, condimentum sed,
-			<code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit
-			eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus
-			enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut
-			felis.</p
-		>
-
-		<h2>Lorem ipsum dolor sit amet</h2>
-
-		<ol>
-			<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-			<li>Aliquam tincidunt mauris eu risus.</li>
-		</ol>
-
-		<blockquote
-			><p
-				>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna.
-				Cras in mi at felis aliquet congue. Ut a est eget ligula molestie
-				gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis,
-				tellus est malesuada tellus, at luctus turpis elit sit amet quam.
-				Vivamus pretium ornare est.</p
-			></blockquote
-		>
-
-		<h3>Lorem ipsum dolor sit amet</h3>
-
-		<ul>
-			<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-			<li>Aliquam tincidunt mauris eu risus.</li>
-		</ul>
-
-		<pre
-			><code
-				>#header h1 a [
-	display: block;
-	width: 300px;
-	height: 80px;
-]</code
-			></pre
-		>
+			>A piece I made for last year was a game that used this technique used in
+			older game called <em>sprite stacking</em>. It's a way to simulating 3D
+			graphics when you don't have the ability to do proper 3D graphics. You can
+			just layer a bunch of sprites on top of each other and spin them around to
+			fake 3D graphics.
+		</p>
 	</div>
 </section>

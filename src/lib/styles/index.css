@@ -5,6 +5,7 @@
 @layer components {
 	html {
 		user-select: none;
+		scroll-behavior: smooth;
 	}
 
 	::selection {
@@ -17,25 +18,26 @@
 			px-4 py-8 gap-8;
 	}
 
-	section.blk {
-		@apply bg-black text-white;
-	}
-
 	section > * {
-	 @apply max-w-screen-sm;
+		@apply max-w-screen-sm;
 	}
 
-	article > :first-child {
-		@apply pt-0;
-	}
-
-	code {
-		/* @apply font-bold; */
+	article > :first-child:not(.pt-0) {
+		@apply pt-16;
 	}
 
 	.prose {
 		@apply prose-neutral select-text
 			prose-pre:bg-black prose-pre:text-white prose-pre:rounded-none
-			prose-headings:font-display;
+			prose-headings:font-display
+			prose-em:font-serif;
+	}
+
+	section.blk {
+		@apply bg-black text-white;
+	}
+
+	section.blk .prose {
+		@apply prose-invert prose-p:text-white font-medium;
 	}
 }
