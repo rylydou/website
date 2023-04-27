@@ -5,6 +5,7 @@
 	import { onDestroy, onMount } from 'svelte'
 
 	export let items: any[] = []
+	export let autoscroll = false
 
 	let is_expanded = false
 	let next_auto_index = 0
@@ -26,6 +27,8 @@
 
 	let interval_handle: NodeJS.Timer
 	onMount(() => {
+		if (!autoscroll) return
+
 		interval_handle = setInterval(() => {
 			if (is_auto_paused) return
 
@@ -39,6 +42,8 @@
 	})
 
 	onDestroy(() => {
+		if (!autoscroll) return
+
 		clearInterval(interval_handle)
 	})
 </script>
@@ -53,12 +58,16 @@
 			}}
 			animate:flip={{ duration: 800, easing: ease }}
 		>
-			<img id="img" src={item.src} alt={item.alt || ':('} draggable="false" />
-			<div class="desc font-bold font-display">
-				Lorem ipsum dolor sit amet consectetur.
+			<img id="img" src={item.src} draggable="false" />
+			<div class="desc md:text-xl font-bold font-display">
+				<span class="bg-black px-2 pb-0.5">
+					Lorem ipsum dolor sit amet consectetur.
+				</span>
 			</div>
 		</button>
 	{/each}
+
+	<div class="placeholder" />
 </div>
 
 <style lang="postcss">
@@ -66,6 +75,11 @@
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		grid-auto-rows: 1fr;
+	}
+
+	.placeholder {
+		grid-column: 1 / span 4;
+		grid-row: 1 / span 3;
 	}
 
 	.item {
@@ -83,9 +97,7 @@
 
 		color: white;
 		padding: 0.75rem 1.25rem;
-		text-shadow: 0 0 4px black;
 		text-align: left;
-		/*background-image: linear-gradient(to top, black, transparent);*/
 	}
 
 	.item > img {
@@ -110,9 +122,13 @@
 	@keyframes fullscreen_fade {
 		from {
 			outline-offset: -50vmax;
+			opacity: 0;
+			filter: blur(8px);
 		}
 		to {
 			outline-offset: 0vmax;
+			opacity: 1;
+			filter: blur(0);
 		}
 	}
 
@@ -131,5 +147,10 @@
 		object-fit: contain;
 		animation: fullscreen_fade 400ms ease;
 		outline: solid 50vmax black;
+	}
+
+	.gallery.expanded > .item:first-child > .desc {
+		text-align: center;
+		padding-bottom: 4rem;
 	}
 </style>

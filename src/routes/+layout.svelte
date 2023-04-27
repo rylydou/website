@@ -1,22 +1,36 @@
 <script>
-	import '../app.css'
+	import '$lib/styles/index.css'
 
 	import '@fontsource/fira-sans'
 	import '@fontsource/fira-sans/800.css'
 	import '@fontsource/roboto-slab'
-	import '@fontsource/roboto-slab/800.css'
-	import '@fontsource/fira-mono'
+	import '@fontsource/roboto-slab/900.css'
+	import '@fontsource/fira-mono/500.css'
+
+	import { writable } from 'svelte/store'
+	import { setContext } from 'svelte'
+
+	const title = writable('')
+	setContext('title', title)
 </script>
 
-<a
-	class="logo absolute md:fixed top-2 left-2 text-2xl font-extrabold font-display text-white px-4 py-2 z-50 mix-blend-difference hover:bg-white hover:text-black"
-	href="/"
->
-	RD:TTSW
-</a>
-<slot />
+<svelte:head>
+	<title>Studio Art 2023 - Ryly Dou</title>
+</svelte:head>
 
-<footer class="py-12 mt-12 bg-black text-white flex justify-center">
+<a class="logo absolute md:fixed z-50 top-2 left-2" href="/">
+	{#if $title}
+		RD - {$title}
+	{:else}
+		RYLY DOU
+	{/if}
+</a>
+
+<article>
+	<slot />
+</article>
+
+<footer class="py-12 bg-black text-white flex justify-center font-bold">
 	<div class="w-full max-w-screen-sm flex flex-row justify-between">
 		<ul>
 			<li><h1>Pages</h1></li>
@@ -51,11 +65,49 @@
 		@apply font-normal bg-white;
 	}
 
+	.logo {
+		@apply px-4 py-2
+			text-lg md:text-2xl
+			font-extrabold font-display
+			bg-black text-white
+			hover:bg-white hover:text-black;
+	}
+
+	.logo:hover {
+		box-shadow: inset 0 0 0 0.25rem black;
+	}
+
 	footer h1 {
-		@apply font-extrabold text-xl;
+		@apply font-extrabold text-xl font-display;
 	}
 
 	footer a {
-		@apply text-yellow-400 hover:underline;
+		position: relative;
+
+		@apply text-yellow-400
+			/* hover:underline; */;
+	}
+
+	footer li:not(:first-child):hover:before,
+	footer li:not(:first-child):hover:after {
+		/* content: '+';
+		position: absolute; */
+		list-style: '+ ';
+		list-style-position: inside;
+	}
+
+	footer a:hover:before,
+	footer a:hover:after {
+		content: '-';
+		position: absolute;
+		bottom: -4px;
+	}
+
+	footer a::before {
+		left: -0.75em;
+	}
+
+	footer a::after {
+		right: -0.75em;
 	}
 </style>

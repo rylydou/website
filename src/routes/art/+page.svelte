@@ -3,38 +3,53 @@
 	import { getContext } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
+	const title = getContext('title') as Writable<string>
+	title.set("ART '23")
+
 	async function generate_placeholder_images(count: number): Promise<any[]> {
 		let arr: any[] = []
 		for (let index = 1; index < count + 1; index++) {
 			arr.push({
 				id: index,
-				src: `https://picsum.photos/seed/${index}/1600/1200`,
+				src: `https://picsum.photos/seed/${index}/1600/900`,
 			})
 		}
 		return arr
 	}
 	let items: any[] = []
 	generate_placeholder_images(9).then((arr) => (items = arr))
-
-	const title = getContext('title') as Writable<string>
-	title.set('')
 </script>
 
-<section class="grid place-items-center bg-black text-white pb-6">
-	<div class="max-w-screen-sm">
-		<Gallery {items} />
+<div class="mt-0 pt-0 w-full h-96 relative">
+	<img
+		class="object-cover object-center w-full h-full"
+		src="https://picsum.photos/seed/-1/1600/900"
+	/>
+	<div
+		class="absolute top-0 left-0 w-full h-full grid place-items-center text-white"
+	>
+		<div class="flex flex-col gap-1 items-end">
+			<span
+				class="bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl md:text-6xl"
+			>
+				Studio Art 2023
+			</span>
+			<span class="select-text font-bold px-6 bg-black text-base md:text-2xl">
+				Sophomore Year Semester 2
+			</span>
+		</div>
 	</div>
-</section>
+</div>
 
-<section class="grid place-items-center pt-8">
-	<div class="max-w-screen-sm select-text prose">
-		Pages
-		<ul>
-			<li>
-				<a href="/art">Studio Art '23</a>
-			</li>
-		</ul>
-
+<section>
+	<div class="prose">
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quaerat
+		sapiente cupiditate molestias ad corporis soluta, minus eligendi voluptates
+		explicabo natus! Adipisci ipsa magni facilis accusamus ratione porro
+		incidunt dolore.
+	</div>
+	<Gallery {items} />
+	<div class="prose">
 		<h1> Lorem ipsum dolor sit amet </h1>
 
 		<p
