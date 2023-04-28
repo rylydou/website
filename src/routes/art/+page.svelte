@@ -1,14 +1,18 @@
 <script lang="ts">
-	import Gallery from '$lib/Gallery.svelte'
 	import { getContext } from 'svelte'
 	import type { Writable } from 'svelte/store'
+
+	import Gallery from '$lib/Gallery.svelte'
+	import Stacker from '$lib/Stacker.svelte'
 
 	import img_car_1 from './static/car-1.jpeg'
 	import img_car_2 from './static/car-2.jpeg'
 	import img_parrot_1 from './static/parrot-1.jpeg'
 	import img_stacker_1 from './static/stacker-1.png'
 	import img_stacker_2 from './static/stacker-2.png'
-	import img_burger_stack from './static/burger-stack.png'
+	import stack_burger from './static/burger.png'
+	import stack_car from './static/car.png'
+	import Slider from '$lib/Slider.svelte'
 
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
@@ -40,6 +44,9 @@
 			desc: 'The sprite stacker tool',
 		},
 	]
+
+	let burger_separation = 0
+	let burger_hd = false
 </script>
 
 <div class="mt-0 pt-0 w-full h-96 relative">
@@ -59,7 +66,7 @@
 			<div
 				class="self-end select-text font-bold px-6 bg-black text-base md:text-2xl"
 			>
-				Too many rabbit holes, not enough rabbits.
+				Too many holes, not enough rabbits.
 			</div>
 		</div>
 	</div>
@@ -101,5 +108,45 @@
 			just layer a bunch of sprites on top of each other and spin them around to
 			fake 3D graphics.
 		</p>
+
+		<p>Ok so how does this work?</p>
+
+		<div class="columns-2">
+			<p>
+				Pretend you are making a hamburger. A hamburger starts as just a bunch
+				of flat layers. But once they have been stacked then the hamburger
+				starts taking shape. Use the slider to on the side to see this in action
+				->
+
+				<br />
+
+				<label>
+					<input type="checkbox" bind:checked={burger_hd} />
+					{#if burger_hd}
+						Fake 3D
+					{:else}
+						Real 2D
+					{/if}
+				</label>
+			</p>
+			<div class="flex flex-row">
+				<input
+					orient="vertical"
+					type="range"
+					bind:value={burger_separation}
+					min="0"
+					max="10"
+					step="0.001"
+				/>
+				<Stacker
+					src={stack_burger}
+					layer_count={9}
+					quality={burger_hd ? 6 : 1}
+					class="w-full h-[50vh] aspect-square"
+					separation={burger_separation}
+				/>
+			</div>
+		</div>
 	</div>
 </section>
+<Stacker src={stack_car} layer_count={16} class="w-full aspect-square hidden" />

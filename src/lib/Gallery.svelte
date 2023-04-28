@@ -118,7 +118,7 @@
 		grid-row: 1 / span 4;
 		aspect-ratio: 4 / 4;
 
-		outline: solid 1px gray;
+		/* outline: solid 1px gray; */
 	}
 
 	.item:first-child > .desc {
