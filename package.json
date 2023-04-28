@@ -27,6 +27,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/noto-serif": "^4.5.11"
+		"@fontsource/noto-serif": "^4.5.11",
+		"postcss-nesting": "^11.2.2"
 	}
 }

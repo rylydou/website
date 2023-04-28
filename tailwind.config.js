@@ -9,6 +9,10 @@ export default {
 				mono: ['Fira mono', 'monospace'],
 				serif: ['Noto serif', 'serif'],
 			},
+			aspectRatio: {
+				'4/3': '4 / 3',
+				'3/4': '3 / 4',
+			},
 		},
 	},
 	plugins: [

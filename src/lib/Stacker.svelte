@@ -10,21 +10,16 @@
 	export let separation = 0.0
 	export let quality = 4.0
 	export let offset = 0.0
+	export let zoom = 1.0
+	export let shade = true
+	export let fps = false
 
 	let img: HTMLImageElement
 
+	let container: HTMLDivElement
 	let canvas: HTMLCanvasElement
-	let width: number
-	let height: number
-
-	$: {
-		if (width && height) {
-			let factor = 1 // TODO Detect low end systems to use half resolution.
-
-			canvas.width = width / factor
-			canvas.height = height / factor
-		}
-	}
+	let container_width = 100
+	let container_height = 100
 
 	let ctx: CanvasRenderingContext2D
 
@@ -34,16 +29,11 @@
 		if (!canvas) return
 
 		ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-		ctx.imageSmoothingEnabled = false
-
-		img = document.createElement('img')
-		// img.onload = () => window.requestAnimationFrame(render)
-		img.src = src
 
 		let observer = new IntersectionObserver((entries, observer) => {
 			if (entries[0].intersectionRatio > 0) {
 				stop_render = false
-				window.requestAnimationFrame(render)
+				start()
 			} else {
 				stop_render = true
 			}
@@ -51,7 +41,21 @@
 		observer.observe(canvas)
 	})
 
-	onDestroy(() => {})
+	function start() {
+		if (!loaded) load()
+		queue_render()
+	}
+
+	let loaded = false
+	function load() {
+		loaded = true
+		if (!img) img = document.createElement('img')
+		img.src = src
+	}
+
+	function queue_render() {
+		requestAnimationFrame(render)
+	}
 
 	let time = 0.0
 	let previous_timestamp: DOMHighResTimeStamp
@@ -64,6 +68,20 @@
 		if (!ctx) return
 		if (!img) return
 
+		if (!img.complete || !img.src) {
+			img.onload = queue_render
+
+			ctx.font = "16px 'Fira mono'"
+			const txt = 'Loading...'
+			const size = ctx.measureText(txt)
+			ctx.fillText(
+				txt,
+				(canvas.width - size.width) / 2,
+				(canvas.height - size.actualBoundingBoxDescent) / 2
+			)
+			return
+		}
+
 		let delta = timestamp - previous_timestamp
 		if (!isNaN(delta)) {
 			time += delta
@@ -73,7 +91,6 @@
 		ctx.imageSmoothingEnabled = false
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-		ctx.fillText(`${Math.round(1000 / delta)} fps`, 8, 8)
 		const q = quality
 		// const q = 1000 / delta < 30 ? Math.floor(quality / 2) : quality
 
@@ -86,10 +103,11 @@
 		const height = layer_count * thickness + layer_count * separation
 		const base = height / -2 + height * offset
 
-		const scale = Math.min(
-			canvas.width / (layer_max * SQRT_2),
-			canvas.height / (height + layer_max * SQRT_2)
-		)
+		const scale =
+			Math.min(
+				canvas.width / (layer_max * SQRT_2),
+				canvas.height / (height + layer_max * SQRT_2)
+			) * zoom
 
 		let y = -base
 
@@ -120,9 +138,15 @@
 
 		const step = thickness / q
 		for (let layer_index = 0; layer_index < layer_count; layer_index++) {
-			// const block_ratio = layer_index / (layer_count - 1)
-			// const bri = lerp(0.75, 1, block_ratio)
-			// ctx.filter = `brightness(${bri})`
+			if (shade) {
+				const block_ratio = layer_index / (layer_count - 1)
+				const bri = lerp(
+					lerp(0.75, 1, block_ratio),
+					1,
+					Math.min(separation / 10, 1)
+				)
+				ctx.filter = `brightness(${bri})`
+			}
 
 			for (let index = 0; index < q; index += 1) {
 				// const ratio = (layer_index * q + index) / (layer_count * q)
@@ -153,7 +177,12 @@
 			y -= separation
 		}
 
-		requestAnimationFrame(render)
+		if (fps) {
+			ctx.font = "16px 'Fira mono'"
+			ctx.fillText(`${Math.round(1000 / delta)} fps`, 1, 17)
+		}
+
+		queue_render()
 	}
 
 	function lerp(a: number, b: number, t: number): number {
@@ -161,9 +190,15 @@
 	}
 </script>
 
-<canvas
-	bind:this={canvas}
-	bind:clientWidth={width}
-	bind:clientHeight={height}
-	{...$$restProps}
-/>
+<div
+	bind:this={container}
+	bind:clientWidth={container_width}
+	bind:clientHeight={container_height}
+>
+	<canvas
+		bind:this={canvas}
+		{...$$restProps}
+		width={container_width}
+		height={container_height}
+	/>
+</div>

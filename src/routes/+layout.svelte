@@ -51,8 +51,8 @@
 			<li><h1>Links</h1></li>
 			<li><a href="https://github.com/CiberTurtle">Github</a></li>
 			<li><a href="https://ciber-turtle.itch.io">Itch.io</a></li>
-			<li><a href="#">Twitter</a></li>
-			<li><a href="#">Youtube</a></li>
+			<li><a href="https://twitter.com/CiberTurtle">Twitter</a></li>
+			<li><a href="https://www.youtube.com/@ciber_turtle">Youtube</a></li>
 		</ul>
 		<ul class="text-sky-400">
 			<li><h1>Extras</h1></li>

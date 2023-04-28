@@ -45,8 +45,10 @@
 		},
 	]
 
-	let burger_separation = 0
-	let burger_hd = false
+	let burger_separation = 0.0
+	let burger_zoom = 1.0
+	let stack_3d = true
+	let stack_shade = true
 </script>
 
 <div class="mt-0 pt-0 w-full h-96 relative">
@@ -90,17 +92,13 @@
 			<li>Minecraft: Procedural generation, voxels (3d pixels) </li>
 		</ul>
 	</div>
-</section>
-
-<section class="">
-	<div class="prose">
-		<p>Here's a quick gallery of the things I made this year:</p>
-	</div>
+	<p>Here's a quick gallery of the things I made this year:</p>
 	<Gallery {items} />
 </section>
 
 <section class="">
 	<div class="prose">
+		<p> Last year I made a </p>
 		<p
 			>A piece I made for last year was a game that used this technique used in
 			older game called <em>sprite stacking</em>. It's a way to simulating 3D
@@ -119,13 +117,26 @@
 				->
 
 				<br />
+				<br />
 
+				If it's running a little bit slow for you then play with these switches.
+				<br />
+				<br />
 				<label>
-					<input type="checkbox" bind:checked={burger_hd} />
-					{#if burger_hd}
+					<input type="checkbox" role="switch" bind:checked={stack_3d} />
+					{#if stack_3d}
 						Fake 3D
 					{:else}
 						Real 2D
+					{/if}
+				</label>
+
+				<label>
+					<input type="checkbox" role="switch" bind:checked={stack_shade} />
+					{#if stack_shade}
+						Shaded
+					{:else}
+						Unshaded
 					{/if}
 				</label>
 			</p>
@@ -141,12 +152,17 @@
 				<Stacker
 					src={stack_burger}
 					layer_count={9}
-					quality={burger_hd ? 6 : 1}
-					class="w-full h-[50vh] aspect-square"
+					quality={stack_3d ? 6 : 1}
+					class="w-full h-96 aspect-3/4"
 					separation={burger_separation}
+					zoom={burger_zoom}
+					shade={stack_shade}
+					fps={true}
 				/>
 			</div>
 		</div>
 	</div>
 </section>
-<Stacker src={stack_car} layer_count={16} class="w-full aspect-square hidden" />
+<section>
+	<Stacker src={stack_car} layer_count={16} class="aspect-square h-96 hidden" />
+</section>
