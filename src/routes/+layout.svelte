@@ -44,15 +44,15 @@
 		</ul>
 		<ul class="text-yellow-400">
 			<li><h1>Works</h1></li>
-			<li><a href="https://ciber-turtle.itch.io">Games</a></li>
+			<li><a href="https://ciber-turtle.itch.io" target="_blank">Games</a></li>
 			<li><a href="/art">Art</a></li>
 		</ul>
 		<ul class="text-lime-400">
 			<li><h1>Links</h1></li>
-			<li><a href="https://github.com/CiberTurtle">Github</a></li>
-			<li><a href="https://ciber-turtle.itch.io">Itch.io</a></li>
-			<li><a href="https://twitter.com/CiberTurtle">Twitter</a></li>
-			<li><a href="https://www.youtube.com/@ciber_turtle">Youtube</a></li>
+			<li><a href="https://github.com/CiberTurtle" target="_blank">Github</a></li>
+			<li><a href="https://ciber-turtle.itch.io" target="_blank">Itch.io</a></li>
+			<li><a href="https://twitter.com/CiberTurtle" target="_blank">Twitter</a></li>
+			<li><a href="https://www.youtube.com/@ciber_turtle" target="_blank">Youtube</a></li>
 		</ul>
 		<ul class="text-sky-400">
 			<li><h1>Extras</h1></li>

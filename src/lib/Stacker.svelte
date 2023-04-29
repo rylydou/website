@@ -179,6 +179,7 @@
 
 		if (fps) {
 			ctx.font = "16px 'Fira mono'"
+			ctx.fillStyle = 'lightgray'
 			ctx.fillText(`${Math.round(1000 / delta)} fps`, 1, 17)
 		}
 

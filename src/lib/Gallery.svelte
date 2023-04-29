@@ -156,7 +156,14 @@
 	}
 
 	.gallery.expanded > .item:first-child > .desc {
+		cursor: zoom-out;
 		text-align: center;
-		padding-bottom: 4rem;
+		padding-bottom: 6rem;
+		transition: opacity 1000ms 1000ms;
+
+		&:hover {
+			opacity: 0;
+			transition: opacity 200ms;
+		}
 	}
 </style>
