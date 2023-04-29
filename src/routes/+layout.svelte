@@ -39,8 +39,8 @@
 		<ul class="text-red-400">
 			<li><h1>Pages</h1></li>
 			<li><a href="/">Home</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/about">About</a></li>
+			<!-- <li><a href="/blog">Blog</a></li> -->
+			<!-- <li><a href="/about">About</a></li> -->
 		</ul>
 		<ul class="text-yellow-400">
 			<li><h1>Works</h1></li>
@@ -95,6 +95,11 @@
 		content: '-';
 		position: absolute;
 		bottom: -4px;
+	}
+
+	footer ul a[target='_blank']:hover:before,
+	footer ul a[target='_blank']:hover:after {
+		content: '+';
 	}
 
 	footer ul a::before {

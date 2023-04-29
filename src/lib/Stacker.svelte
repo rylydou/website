@@ -15,6 +15,7 @@
 	export let fps = false
 
 	let img: HTMLImageElement
+	let img_error = false
 
 	let container: HTMLDivElement
 	let canvas: HTMLCanvasElement
@@ -42,15 +43,18 @@
 	})
 
 	function start() {
-		if (!loaded) load()
+		if (!is_init) init()
 		queue_render()
 	}
 
-	let loaded = false
-	function load() {
-		loaded = true
-		if (!img) img = document.createElement('img')
+	let is_init = false
+	function init() {
+		is_init = true
+		img = new Image()
 		img.src = src
+		img.onerror = () => {
+			img_error = true
+		}
 	}
 
 	function queue_render() {
@@ -64,14 +68,32 @@
 			stop_render = false
 			return
 		}
+
 		if (!canvas) return
 		if (!ctx) return
 		if (!img) return
 
-		if (!img.complete || !img.src) {
-			img.onload = queue_render
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-			ctx.font = "16px 'Fira mono'"
+		let delta = timestamp - previous_timestamp
+		previous_timestamp = timestamp
+
+		if (img_error) {
+			ctx.font = "16px 'Fira sans'"
+			ctx.fillStyle = 'red'
+			const txt = 'Could not load :('
+			const size = ctx.measureText(txt)
+			ctx.fillText(
+				txt,
+				(canvas.width - size.width) / 2,
+				(canvas.height - size.actualBoundingBoxDescent) / 2
+			)
+			queue_render()
+			return
+		}
+
+		if (!img.complete || !img.src) {
+			ctx.font = "16px 'Fira sans'"
 			const txt = 'Loading...'
 			const size = ctx.measureText(txt)
 			ctx.fillText(
@@ -79,17 +101,15 @@
 				(canvas.width - size.width) / 2,
 				(canvas.height - size.actualBoundingBoxDescent) / 2
 			)
+			queue_render()
 			return
 		}
 
-		let delta = timestamp - previous_timestamp
 		if (!isNaN(delta)) {
 			time += delta
 		}
-		previous_timestamp = timestamp
 
 		ctx.imageSmoothingEnabled = false
-		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
 		const q = quality
 		// const q = 1000 / delta < 30 ? Math.floor(quality / 2) : quality
@@ -104,10 +124,8 @@
 		const base = height / -2 + height * offset
 
 		const scale =
-			Math.min(
-				canvas.width / (layer_max * SQRT_2),
-				canvas.height / (height + layer_max * SQRT_2)
-			) * zoom
+			Math.min(canvas.width / (layer_max * SQRT_2), canvas.height / (height + layer_max * SQRT_2)) *
+			zoom
 
 		let y = -base
 
@@ -140,11 +158,7 @@
 		for (let layer_index = 0; layer_index < layer_count; layer_index++) {
 			if (shade) {
 				const block_ratio = layer_index / (layer_count - 1)
-				const bri = lerp(
-					lerp(0.75, 1, block_ratio),
-					1,
-					Math.min(separation / 10, 1)
-				)
+				const bri = lerp(lerp(0.75, 1, block_ratio), 1, Math.min(separation / 10, 1))
 				ctx.filter = `brightness(${bri})`
 			}
 
@@ -180,6 +194,7 @@
 		if (fps) {
 			ctx.font = "16px 'Fira mono'"
 			ctx.fillStyle = 'lightgray'
+
 			ctx.fillText(`${Math.round(1000 / delta)} fps`, 1, 17)
 		}
 
@@ -191,15 +206,6 @@
 	}
 </script>
 
-<div
-	bind:this={container}
-	bind:clientWidth={container_width}
-	bind:clientHeight={container_height}
->
-	<canvas
-		bind:this={canvas}
-		{...$$restProps}
-		width={container_width}
-		height={container_height}
-	/>
+<div bind:this={container} bind:clientWidth={container_width} bind:clientHeight={container_height}>
+	<canvas bind:this={canvas} {...$$restProps} width={container_width} height={container_height} />
 </div>

@@ -48,10 +48,6 @@
 				box-shadow 100ms linear;
 			box-shadow: 0 0 0 8px white, 0 0 0 12px black;
 		}
-
-		&:active {
-			scale: 4;
-		}
 	}
 
 	section.blk {

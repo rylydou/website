@@ -5,15 +5,16 @@
 	import Gallery from '$lib/Gallery.svelte'
 	import Stacker from '$lib/Stacker.svelte'
 
-	import img_car_1 from './static/car-1.jpeg'
-	import img_car_2 from './static/car-2.jpeg'
-	import img_parrot_1 from './static/parrot-1.jpeg'
-	import img_stacker_1 from './static/stacker-1.png'
-	import img_stacker_2 from './static/stacker-2.png'
-	import img_awakening_1 from './static/awakening-1.png'
-	import mk_1 from './static/mk-1.webp'
-	import stack_burger from './static/burger.png'
-	import stack_car from './static/car.png'
+	import img_car_1 from './static/car-1.webp'
+	import img_car_2 from './static/car-2.webp'
+	import img_parrot from './static/parrot.webp'
+	import img_car from './static/car.webp'
+	import img_stacker from './static/stacker.webp'
+	import img_awakening_1 from './static/awakening-1.webp'
+	import img_awakening_map from './static/awakening-map.webp'
+	import stack_burger from './static/stack-burger.webp'
+	import stack_car from './static/stack-car.webp'
+
 	import { shuffle } from '$lib/util'
 
 	const title = getContext('title') as Writable<string>
@@ -22,13 +23,13 @@
 	let items: any[] = [
 		{
 			id: 1,
-			src: img_parrot_1,
+			src: img_parrot,
 			desc: 'The pixel parrot',
 		},
 		{
 			id: 2,
-			src: 'src/routes/art/static/awakening-map.webp',
-			desc: 'The map of Awakening',
+			src: img_awakening_map,
+			desc: 'A work in progress map of Awakening',
 		},
 		{
 			id: 3,
@@ -37,12 +38,12 @@
 		},
 		{
 			id: 4,
-			src: img_stacker_1,
+			src: img_car,
 			desc: 'The stacker slacker CAD model',
 		},
 		{
 			id: 5,
-			src: img_stacker_2,
+			src: img_stacker,
 			desc: 'The sprite stacker tool',
 		},
 		{
@@ -104,21 +105,34 @@
 </section>
 
 <section>
-	<div class="prose">
-		<p>
-			Last year I made a prototype driving game prototype. In a driving game you need to be able
-			turn smoothly which would traditionally require you to draw many different sprites for all the
-			angles you could be facing.
-		</p>
-	</div>
+	<div class="relative grid place-items-center w-full max-w-screen-lg">
+		<video
+			class="pixel w-full aspect-video"
+			src="./static/mushvroom.webm"
+			autoplay
+			loop
+			muted
+			playsinline
+		/>
 
-	<div class="columns-2 gap-0">
-		<img class="img pixel" src={mk_1} />
-		<p class="prose">
+		<div class="absolute max-w-screen-md h-full grid place-content-end p-4 pointer-events-none">
+			<p class="bottom-0 left-0 text-white font-bold bg-black px-3 py-2 w-[50%]">
+				This is a protoype of a driving game I made last year. In a driving game you need to be able
+				turn smoothly which would traditionally require you to draw many different sprites for all
+				the angles you could be facing.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="prose columns-2">
+		<p>
 			Some older games like the original Mario Kart on the SNES would do this. The problem is that
 			it is a lot of work to do. You would have to painstakingly draw out each angle by hand which
 			work take a lot of time.
 		</p>
+		<img class="img pixel" src="./static/mk-1.webp" />
 	</div>
 
 	<div class="prose">
@@ -132,8 +146,29 @@
 		<p class="text-center italic">Ok so how does this work?</p>
 	</div>
 
-	<div class="columns-2">
-		<div class="prose">
+	<div class="columns-2 gap-0">
+		<div class="flex flex-row">
+			<Stacker
+				src={stack_burger}
+				layer_count={9}
+				quality={stack_3d ? 6 : 1}
+				class="w-full h-96 aspect-3/4"
+				separation={burger_separation}
+				zoom={burger_zoom}
+				shade={stack_shade}
+				fps={true}
+			/>
+			<input
+				orient="vertical"
+				type="range"
+				bind:value={burger_separation}
+				min="0"
+				max="10"
+				step="0.1"
+			/>
+		</div>
+
+		<div class="prose ml-1">
 			<p>
 				Pretend you are making a delicious burger. A burger starts as just a bunch of flat layers.
 				But once they have been stacked then the hamburger starts taking shape.
@@ -160,27 +195,6 @@
 					</label>
 				</span>
 			</p>
-		</div>
-
-		<div class="flex flex-row">
-			<input
-				orient="vertical"
-				type="range"
-				bind:value={burger_separation}
-				min="0"
-				max="10"
-				step="0.001"
-			/>
-			<Stacker
-				src={stack_burger}
-				layer_count={9}
-				quality={stack_3d ? 6 : 1}
-				class="w-full h-96 aspect-3/4"
-				separation={burger_separation}
-				zoom={burger_zoom}
-				shade={stack_shade}
-				fps={true}
-			/>
 		</div>
 	</div>
 </section>
