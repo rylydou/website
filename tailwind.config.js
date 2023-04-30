@@ -7,7 +7,7 @@ export default {
 				normal: ['Fira sans', 'sans-serif'],
 				display: ['Roboto slab', 'serif'],
 				mono: ['Fira mono', 'monospace'],
-				serif: ['Noto serif', 'serif'],
+				fancy: ['Pacifico', 'cursive'],
 			},
 			aspectRatio: {
 				'4/3': '4 / 3',

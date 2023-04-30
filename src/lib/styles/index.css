@@ -28,10 +28,10 @@
 	}
 
 	.prose {
-		@apply prose-neutral select-text
+		@apply prose-neutral prose-yellow select-text
 			prose-pre:bg-black prose-pre:text-white prose-pre:rounded-none
 			prose-headings:font-display
-			prose-em:font-serif;
+			prose-em:font-fancy prose-em:not-italic;
 	}
 
 	.img {

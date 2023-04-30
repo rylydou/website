@@ -106,9 +106,10 @@
 </section>
 
 <section>
-	<div class="relative grid place-items-center w-full max-w-screen-lg">
+	<div class="relative grid place-items-center w-full max-w-screen-lg aspect-video">
 		<video
-			class="pixel w-full aspect-video"
+			class="absolute right-0 top-0 h-full object-cover pixel"
+			style=""
 			src="./static/mushvroom.webm"
 			loop
 			muted
@@ -116,7 +117,7 @@
 			use:video_background_play
 		/>
 
-		<div class="absolute max-w-screen-md h-full grid place-content-end p-4 pointer-events-none">
+		<div class="absolute max-w-screen-lg h-full grid place-content-end p-4 pointer-events-none">
 			<p class="bottom-0 left-0 text-white font-bold bg-black px-3 py-2 w-[50%]">
 				This is a protoype of a driving game I made last year. In a driving game you need to be able
 				turn smoothly which would traditionally require you to draw many different sprites for all

@@ -12,6 +12,7 @@
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
 		"@fontsource/fira-sans": "^4.5.10",
+		"@fontsource/pacifico": "^4.5.9",
 		"@fontsource/roboto-slab": "^4.5.11",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.2",
@@ -31,7 +32,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/noto-serif": "^4.5.11",
 		"postcss-nesting": "^11.2.2"
 	}
 }
