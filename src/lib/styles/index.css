@@ -16,7 +16,7 @@
 	section {
 		@apply
 			w-full flex flex-col justify-center items-center
-			px-4 py-8 gap-8;
+			px-0 py-8 gap-8;
 	}
 
 	section > * {
@@ -142,6 +142,15 @@
 	input[type="range"][orient=vertical]::-moz-range-thumb {
 		width: 100%;
 		height: 0.5rem;
+	}
+
+	video[data-waiting="false"] {
+		/* transition: filter 100ms; */
+	}
+
+	video[data-waiting="true"] {
+		filter: brightness(.5) grayscale(.5);
+		/* transition: filter 100ms; */
 	}
 }
 

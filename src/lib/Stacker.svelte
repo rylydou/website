@@ -32,7 +32,7 @@
 		ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
 		let observer = new IntersectionObserver((entries, observer) => {
-			if (entries[0].intersectionRatio > 0) {
+			if (entries[0].isIntersecting) {
 				stop_render = false
 				start()
 			} else {
@@ -73,10 +73,15 @@
 		if (!ctx) return
 		if (!img) return
 
-		ctx.clearRect(0, 0, canvas.width, canvas.height)
-
 		let delta = timestamp - previous_timestamp
 		previous_timestamp = timestamp
+
+		// if (!document.hasFocus()) {
+		// 	queue_render()
+		// 	return
+		// }
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
 		if (img_error) {
 			ctx.font = "16px 'Fira sans'"

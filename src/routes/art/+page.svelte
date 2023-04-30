@@ -16,6 +16,7 @@
 	import stack_car from './static/stack-car.webp'
 
 	import { shuffle } from '$lib/util'
+	import { video_background_play } from '$lib/actions/video'
 
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
@@ -109,10 +110,10 @@
 		<video
 			class="pixel w-full aspect-video"
 			src="./static/mushvroom.webm"
-			autoplay
 			loop
 			muted
 			playsinline
+			use:video_background_play
 		/>
 
 		<div class="absolute max-w-screen-md h-full grid place-content-end p-4 pointer-events-none">
