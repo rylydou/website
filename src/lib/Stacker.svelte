@@ -211,6 +211,11 @@
 	}
 </script>
 
-<div bind:this={container} bind:clientWidth={container_width} bind:clientHeight={container_height}>
-	<canvas bind:this={canvas} {...$$restProps} width={container_width} height={container_height} />
+<div
+	bind:this={container}
+	bind:clientWidth={container_width}
+	bind:clientHeight={container_height}
+	{...$$restProps}
+>
+	<canvas bind:this={canvas} width={container_width} height={container_height} />
 </div>

@@ -7,7 +7,6 @@
 	import '@fontsource/roboto-slab'
 	import '@fontsource/roboto-slab/900.css'
 	import '@fontsource/fira-mono/500.css'
-	import '@fontsource/pacifico'
 
 	import { writable } from 'svelte/store'
 	import { setContext } from 'svelte'

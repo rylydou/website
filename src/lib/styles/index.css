@@ -16,7 +16,7 @@
 	section {
 		@apply
 			w-full flex flex-col justify-center items-center
-			px-0 py-8 gap-8;
+			py-8 gap-4;
 	}
 
 	section > * {
@@ -32,22 +32,6 @@
 			prose-pre:bg-black prose-pre:text-white prose-pre:rounded-none
 			prose-headings:font-display
 			prose-em:font-fancy prose-em:not-italic;
-	}
-
-	.img {
-		cursor: zoom-in;
-		transition:
-			scale 400ms easeOutBack,
-			box-shadow 100ms linear;
-		background-color: white;
-
-		&:hover {
-			z-index: 40;
-			scale: 2;
-			transition: scale 600ms 400ms cubic-bezier(.61,-0.62,.25,1.16),
-				box-shadow 100ms linear;
-			box-shadow: 0 0 0 8px white, 0 0 0 12px black;
-		}
 	}
 
 	section.blk {
@@ -152,10 +136,54 @@
 		filter: brightness(.5) grayscale(.5);
 		/* transition: filter 100ms; */
 	}
+
+	.info {
+		@apply px-2 py-1 bg-yellow-400 text-black;
+
+		&::before {
+			content: '🛈 ';
+			@apply font-bold;
+		}
+	}
+
+	.frame {
+		@apply border-l-yellow-400 border-l-2 pl-2;
+	}
 }
 
 @layer utilities {
 	.pixel {
 		image-rendering: pixelated;
 	}
+
+	.zoomable {
+		cursor: zoom-in;
+
+		transition:
+			scale 400ms easeOutBack,
+			outline 100ms linear;
+
+		&:hover {
+			background-color: white;
+			z-index: 40;
+			scale: 2;
+			animation: none;
+			outline: solid 4px black;
+			outline-offset: 8px;
+			box-shadow: 0 0 0 8px white;
+
+			transition:
+				scale 600ms 400ms cubic-bezier(.61,-0.62,.25,1.16),
+				outline 100ms linear;
+		}
+	}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+.animate-spin-slow {
+  animation: spin 6s linear infinite;
+}
 }
