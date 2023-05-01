@@ -17,13 +17,13 @@
 	let img: HTMLImageElement
 	let img_error = false
 
-	let container: HTMLDivElement
 	let canvas: HTMLCanvasElement
 	let container_width = 100
 	let container_height = 100
 
 	let ctx: CanvasRenderingContext2D
 
+	let render_index = false
 	let stop_render = false
 
 	onMount(() => {
@@ -211,11 +211,6 @@
 	}
 </script>
 
-<div
-	bind:this={container}
-	bind:clientWidth={container_width}
-	bind:clientHeight={container_height}
-	{...$$restProps}
->
+<div bind:clientWidth={container_width} bind:clientHeight={container_height} {...$$restProps}>
 	<canvas bind:this={canvas} width={container_width} height={container_height} />
 </div>

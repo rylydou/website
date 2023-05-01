@@ -19,6 +19,7 @@
 
 	import { shuffle } from '$lib/util'
 	import { video_background_play as video_background } from '$lib/actions/video'
+	import Rabbit from './Rabbit.svelte'
 
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
@@ -85,6 +86,10 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="grid place-items-center bg-amber-400 p-4">
+	<Rabbit />
 </div>
 
 <section>
@@ -200,9 +205,8 @@
 
 			<p>
 				Here are some switches if things are running too slow.
-				<br />
-				<br />
-				<label>
+
+				<label class="mt-2">
 					<input type="checkbox" role="switch" bind:checked={stack_3d} />
 					{#if stack_3d}
 						Fake 3D (slower)
@@ -210,6 +214,7 @@
 						Real 2D (faster)
 					{/if}
 				</label>
+
 				<label>
 					<input type="checkbox" role="switch" bind:checked={stack_shade} />
 					{#if stack_shade}
@@ -261,7 +266,6 @@
 			class="w-96 h-96 mx-auto"
 			src={stack_car}
 			layer_count={16}
-			zoom={1.25}
 			quality={stack_3d ? 4 : 1}
 			shade={stack_shade}
 		/>
