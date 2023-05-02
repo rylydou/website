@@ -20,6 +20,7 @@
 	import { shuffle } from '$lib/util'
 	import { video_background_play as video_background } from '$lib/actions/video'
 	import Rabbit from './Rabbit.svelte'
+	import RabbitHero from './RabbitHero.svelte'
 
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
@@ -69,49 +70,47 @@
 	let stack_shade = true
 </script>
 
-<div class="mt-0 pt-0 w-full h-96 relative">
-	<img
-		class="object-cover object-center w-full h-full"
-		src="https://picsum.photos/seed/-1/1600/900"
-	/>
+<div class="relative mt-0 pt-0 w-full h-96 bg-yellow-400">
 	<div class="absolute top-0 left-0 w-full h-full grid place-items-center text-white">
-		<div class="flex flex-col gap-1.5 w-full max-w-screen-sm">
+		<div class="flex flex-col gap-1.5 w-full max-w-screen-sm p-2">
 			<div
-				class="self-start bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl md:text-6xl"
+				class="self-center sm:self-start bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl sm:text-6xl"
 			>
 				Studio Art 2023
 			</div>
-			<div class="self-end select-text font-bold px-6 py-1 bg-black text-base md:text-2xl">
+			<div
+				class="self-center sm:self-end select-text font-bold px-6 py-1 bg-black text-lg sm:text-2xl"
+			>
 				Too many holes, not enough rabbits.
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="grid place-items-center bg-amber-400 p-4">
-	<Rabbit />
+	<div class="absolute w-full h-full flex flex-row justify-center p-8 pt-0">
+		<RabbitHero class="grid grid-cols-6 gap-8 content-between" />
+	</div>
 </div>
 
 <section>
 	<div class="prose">
 		<p>
-			Last year I made the mistake of now having a theme. It made it grueling to come up with ideas.
-			A theme helps give focus and limits the decision paralysis one might get without one. At the
-			same time I still didn’t want my theme to be something like <em>“underwater”</em> or
+			Last year, I made the mistake of not having a theme. It made it grueling to come up with
+			ideas. A theme helps give focus and limits the decision paralysis one might get without one.
+			At the same time I still didn’t want my theme to be something like <em>“underwater”</em> or
 			<em>“darkness”</em> because themes like that tend to be too restrictive and too boring. I
 			always found the themes for the game jams I participated in very interesting. They were always
 			some kind of common saying or phrase from a movie like “What goes up must come down”, “Less is
 			more”, or “Stuck in a loop”. But some of the most fun game jams would be based on some sort of
 			restriction like “Made for the GameBoy”, “1-Bit” (only two colors), or “A 64x64 Resolution”. I
-			know it sounds weird to say, but having a resection is somehow less restrictive than being
+			know it sounds weird to say, but having a restriction is somehow less restrictive than being
 			forced to flow a traditional theme like <em>“underwater”</em>. I think it’s more fun to figure
 			out how to create something out of a really strange restriction or phrase.
 		</p>
 
 		<p>
-			That is why this year I chose to have the theme of <code>Computer Graphics</code> this year. I
-			know, it sounds really boring, but hear me out. You could make something with the limitations
-			of computer graphics in mind, like pixel art. Or you could make something about computer
+			That is why this year I chose to have the theme of <code>Computer Graphics</code>. I know, it
+			sounds really boring, but hear me out. You could make something with the limitations of
+			computer graphics in mind, like pixel art. Or you could make something about computer
 			graphics, like drawing something inspired by the complex patterns of copper traces on a
 			circuit board. I was really excited by this theme and all the many ways it could be taken. But
 			there was one thing looming over me: <strong>Time</strong>.
@@ -130,27 +129,23 @@
 			impression that it is turning.
 		</p>
 
-		<div class="columns-2">
-			<div class="grid place-content-center">
-				<img class="pixel zoomable animate-spin-slow w-28 h-auto" src="./static/spr-top.webp" />
-			</div>
-			<p>
-				An easy way to do this is by just taking one sprite and rotating it based on the direction
-				the player is facing.
-			</p>
+		<div class="grid place-content-center">
+			<img class="pixel zoomable animate-spin-slow w-28 h-auto" src="./static/spr-top.webp" />
 		</div>
+		<p>
+			An easy way to do this is by just taking one sprite and rotating it based on the direction the
+			player is facing.
+		</p>
 
-		<div class="columns-2">
-			<p>
-				But this requires that the camera must be at a bird eye view at all times or else this will
-				happen.
-			</p>
-			<div class="grid place-content-center">
-				<img class="pixel zoomable animate-spin-slow w-28 h-auto" src="./static/spr-side.webp" />
-			</div>
+		<div class="grid flex-col sm:flex-row place-content-center">
+			<img class="pixel zoomable animate-spin-slow w-28 h-auto" src="./static/spr-side.webp" />
 		</div>
+		<p>
+			But this requires that the camera must be at a bird eye view at all times or else this will
+			happen.
+		</p>
 
-		<div class="columns-2">
+		<div class="flex flex-col items-center gap-4">
 			<img class="zoomable pixel m-0" src="./static/mk-1.webp" />
 			<p>
 				The solution older games would use is to just painstakingly draw a bunch of different
@@ -193,7 +188,7 @@
 </section>
 
 <section>
-	<div class="columns-2 gap-0">
+	<div class="flex flex-col sm:flex-row gap-0">
 		<div class="prose">
 			<p>
 				Pretend you are making a delicious hamburger. The parts that make up a complete burger are
@@ -239,7 +234,7 @@
 				src={stack_burger}
 				layer_count={9}
 				quality={stack_3d ? 6 : 1}
-				class="w-full h-96 aspect-3/4 flex-grow"
+				class="w-full h-80 sm:h-96 aspect-3/4 flex-grow"
 				separation={burger_separation}
 				zoom={burger_zoom}
 				shade={stack_shade}
@@ -256,8 +251,8 @@
 			the cart in real life is pretty cool right? But there’s one slight problem: I’m stupid. From
 			my experience from drawing the sprites for the driving game, it’s hard. There’s no way I would
 			be able to track all of those layers on more complex objects. So I made a tool to help me.
-			Yeah I know it’s not pretty, but it sure is functional… except for undo, it does not have
-			that.
+			Yeah I know it’s not pretty, but it sure is functional… except for an undo button, it does not
+			have that.
 		</p>
 
 		<p>This tool made it trivial to design the cart. I mean just look at it, it's glorious...</p>
