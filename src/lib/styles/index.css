@@ -28,7 +28,7 @@
 	}
 
 	.prose {
-		@apply prose-neutral prose-yellow select-text
+		@apply prose-neutral prose-yellow select-text px-2 sm:px-0
 			prose-pre:bg-black prose-pre:text-white prose-pre:rounded-none
 			prose-headings:font-display
 			prose-em:font-fancy prose-em:not-italic;
@@ -142,11 +142,11 @@
 	}
 
 	.info {
-		@apply px-2 py-1 bg-yellow-400 text-black;
+		@apply px-2 py-1 bg-blue-100 text-black;
 
 		&::before {
-			content: '🛈 ';
-			@apply font-bold;
+			content: 'fyi:';
+			@apply px-2 bg-black text-white font-bold mr-2;
 		}
 	}
 

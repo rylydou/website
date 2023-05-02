@@ -4,65 +4,15 @@
 	import { getContext } from 'svelte'
 	import type { Writable } from 'svelte/store'
 
-	import Gallery from '$lib/Gallery.svelte'
 	import Stacker from '$lib/Stacker.svelte'
+	import { video_background_play as video_background } from '$lib/actions/video'
 
-	import img_car_1 from './static/car-1.webp'
-	import img_car_2 from './static/car-2.webp'
-	import img_parrot from './static/parrot.webp'
-	import img_car from './static/car.webp'
-	import img_stacker from './static/stacker.webp'
-	import img_awakening_1 from './static/awakening-1.webp'
-	import img_awakening_map from './static/awakening-map.webp'
+	import RabbitHero from './RabbitHero.svelte'
 	import stack_burger from './static/stack-burger.webp'
 	import stack_car from './static/stack-car.webp'
 
-	import { shuffle } from '$lib/util'
-	import { video_background_play as video_background } from '$lib/actions/video'
-	import Rabbit from './Rabbit.svelte'
-	import RabbitHero from './RabbitHero.svelte'
-
 	const title = getContext('title') as Writable<string>
 	title.set("ART '23")
-
-	let items: any[] = [
-		{
-			id: 1,
-			src: img_parrot,
-			desc: 'The pixel parrot',
-		},
-		{
-			id: 2,
-			src: img_awakening_map,
-			desc: 'A work in progress map of Awakening',
-		},
-		{
-			id: 3,
-			src: img_car_2,
-			desc: 'The stacker slacker IRL',
-		},
-		{
-			id: 4,
-			src: img_car,
-			desc: 'The stacker slacker CAD model',
-		},
-		{
-			id: 5,
-			src: img_stacker,
-			desc: 'The sprite stacker tool',
-		},
-		{
-			id: 6,
-			src: img_awakening_1,
-			desc: 'Awakening',
-		},
-		{
-			id: 7,
-			src: img_car_1,
-			desc: 'The stacker slacker IRL (alternate angle)',
-		},
-	]
-	items = shuffle(items)
 
 	let burger_separation = 0.0
 	let burger_zoom = 1.0
@@ -70,8 +20,8 @@
 	let stack_shade = true
 </script>
 
-<div class="relative mt-0 pt-0 w-full h-96 bg-yellow-400">
-	<div class="absolute top-0 left-0 w-full h-full grid place-items-center text-white">
+<div class="w-full pt-0 h-96 bg-yellow-400">
+	<div class="relative w-full h-full grid place-items-center text-white pt-8">
 		<div class="flex flex-col gap-1.5 w-full max-w-screen-sm p-2">
 			<div
 				class="self-center sm:self-start bg-black px-6 pb-3 pt-2 select-text font-display font-extrabold text-4xl sm:text-6xl"
@@ -84,10 +34,12 @@
 				Too many holes, not enough rabbits.
 			</div>
 		</div>
-	</div>
 
-	<div class="absolute w-full h-full flex flex-row justify-center p-8 pt-0">
-		<RabbitHero class="grid grid-cols-6 gap-8 content-between" />
+		<div
+			class="absolute left-0 right-0 bottom-0 top-0 flex flex-row justify-center px-8 py-14 sm:py-4"
+		>
+			<RabbitHero class="grid grid-cols-6 gap-6 sm:gap-8 content-between" />
+		</div>
 	</div>
 </div>
 
@@ -157,46 +109,41 @@
 	</div>
 </section>
 
-<section class="blk">
-	<div class="relative grid place-items-center w-full max-w-screen-lg aspect-video">
-		<video
-			class="absolute right-0 top-0 h-full object-cover pixel"
-			style=""
-			src="./static/mushvroom.webm"
-			loop
-			muted
-			playsinline
-			use:video_background
-		/>
+<section class="blk min-h-screen flex flex-col justify-evenly">
+	<p class="prose">
+		In this project I made last year I used a technique to draw the vehicle. This technique saved me
+		drawing the dozens of required sprites for all of the angles. This technique is called sprite
+		stacking. It's a way to sort of fake 3D graphics when you only have the ability to actually do
+		2d graphics.
+	</p>
 
-		<div class="absolute max-w-screen-lg h-full grid place-content-end p-4 pointer-events-none">
-			<p class="bottom-0 left-0 text-white font-bold bg-black px-3 py-2 w-[50%]">
-				In this project I made last year I used a technique to draw the vehicle. This technique
-				saved me drawing the dozens of required sprites for all of the angles.
-			</p>
-		</div>
-	</div>
+	<video
+		class="aspect-video w-full max-w-screen-lg h-full pixel"
+		style=""
+		src="./static/mushvroom.webm"
+		loop
+		muted
+		playsinline
+		use:video_background
+	/>
 
 	<div class="prose">
-		<p>
-			This technique is called sprite stacking. It's a way to sort of fake 3D graphics when you only
-			have the ability to actually do 2d graphics.
-		</p>
-
 		<p class="text-center italic">Ok so how does this work?</p>
 	</div>
 </section>
 
 <section>
-	<div class="flex flex-col sm:flex-row gap-0">
-		<div class="prose">
+	<div class="w-full flex flex-col md:flex-row gap-4 md:gap-0 px-2 md:px-0">
+		<div class="prose mx-auto">
 			<p>
 				Pretend you are making a delicious hamburger. The parts that make up a complete burger are
 				pretty flat when looked at on their own. But only once they have been stacked on top one
 				another is when the burger starts to take shape. <strong>
-					Use the slider to the left to see this in action.
+					Use the slider to see this in action.
 				</strong>
 			</p>
+
+			<div class="info">Use the slider to see this in action.</div>
 
 			<p>
 				Here are some switches if things are running too slow.
@@ -221,7 +168,7 @@
 			</p>
 		</div>
 
-		<div class="flex flex-row">
+		<div class="flex flex-row px-2 sm:px-0">
 			<input
 				orient="vertical"
 				type="range"
@@ -234,7 +181,7 @@
 				src={stack_burger}
 				layer_count={9}
 				quality={stack_3d ? 6 : 1}
-				class="w-full h-80 sm:h-96 aspect-3/4 flex-grow"
+				class="w-full h-80 sm:h-96 sm:aspect-3/4 flex-grow"
 				separation={burger_separation}
 				zoom={burger_zoom}
 				shade={stack_shade}
@@ -262,7 +209,7 @@
 			src={stack_car}
 			layer_count={16}
 			quality={stack_3d ? 4 : 1}
-			shade={stack_shade}
+			shade={false}
 		/>
 
 		<p>
