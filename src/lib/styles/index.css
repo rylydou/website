@@ -36,10 +36,10 @@
 
 	section.blk {
 		@apply bg-black text-white;
-	}
 
-	section.blk .prose {
-		@apply prose-invert prose-p:text-white font-medium;
+		& .prose {
+			@apply prose-invert text-white font-medium;
+		}
 	}
 
 	label {
@@ -142,16 +142,12 @@
 	}
 
 	.info {
-		@apply px-2 py-1 bg-blue-100 text-black;
+		@apply flex flex-row items-start p-1 bg-yellow-400 text-black;
 
 		&::before {
 			content: 'fyi:';
-			@apply px-2 bg-black text-white font-bold mr-2;
+			@apply px-2 bg-black text-white font-bold mr-3;
 		}
-	}
-
-	.frame {
-		@apply border-l-yellow-400 border-l-2 pl-2;
 	}
 }
 

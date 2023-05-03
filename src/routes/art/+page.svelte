@@ -134,7 +134,7 @@
 
 <section>
 	<div class="w-full flex flex-col md:flex-row gap-4 md:gap-0 px-2 md:px-0">
-		<div class="prose mx-auto">
+		<div class="prose mx-auto md:w-1/2">
 			<p>
 				Pretend you are making a delicious hamburger. The parts that make up a complete burger are
 				pretty flat when looked at on their own. But only once they have been stacked on top one
@@ -168,7 +168,7 @@
 			</p>
 		</div>
 
-		<div class="flex flex-row px-2 sm:px-0">
+		<div class="flex flex-row px-2 md:px-0 md:w-1/2">
 			<input
 				orient="vertical"
 				type="range"
@@ -181,7 +181,7 @@
 				src={stack_burger}
 				layer_count={9}
 				quality={stack_3d ? 6 : 1}
-				class="w-full h-80 sm:h-96 sm:aspect-3/4 flex-grow"
+				class="min-w-0 w-full h-80 sm:h-96 flex-grow"
 				separation={burger_separation}
 				zoom={burger_zoom}
 				shade={stack_shade}
@@ -205,7 +205,7 @@
 		<p>This tool made it trivial to design the cart. I mean just look at it, it's glorious...</p>
 
 		<Stacker
-			class="w-96 h-96 mx-auto"
+			class="w-full h-96 mx-auto"
 			src={stack_car}
 			layer_count={16}
 			quality={stack_3d ? 4 : 1}
