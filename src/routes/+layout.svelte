@@ -19,13 +19,26 @@
 	<title>Studio Art 2023 - Ryly Dou</title>
 </svelte:head>
 
-<a class="logo absolute md:fixed z-50 top-2 left-2" href="/">
+<!-- <a class="logo absolute md:fixed z-50 top-2 left-2" href="/">
 	{#if $title}
 		RD - {$title}
 	{:else}
 		RYLY DOU
 	{/if}
-</a>
+</a> -->
+
+<nav class="md:absolute z-50 top-2 left-2 right-2 text-black font-bold flex flex-row">
+	<a class="logo" href="/">
+		{#if $title}
+			RD - {$title}
+		{:else}
+			RYLY DOU
+		{/if}
+	</a>
+	<div class="w-2" />
+	<a href="/blog">Blog</a>
+	<a href="https://ciber-turtle.itch.io" target="_blank">Games</a>
+</nav>
 
 <article>
 	<slot />
@@ -38,8 +51,7 @@
 		<ul class="text-red-400">
 			<li><h1>Pages</h1></li>
 			<li><a href="/">Home</a></li>
-			<!-- <li><a href="/blog">Blog</a></li> -->
-			<!-- <li><a href="/about">About</a></li> -->
+			<li><a href="/about">About</a></li>
 		</ul>
 		<ul class="text-yellow-400">
 			<li><h1>Works</h1></li>
@@ -67,16 +79,24 @@
 
 	.logo {
 		@apply px-4 py-2
-			text-lg md:text-2xl
+			text-2xl
 			font-extrabold font-display
 			bg-black text-white;
 	}
 
 	.logo:hover {
-		@apply underline underline-offset-2
-			/* bg-white text-black; */;
+		@apply underline underline-offset-2;
 		text-decoration-thickness: 2px;
-		/* box-shadow: inset 0 0 0 0.125rem black; */
+	}
+
+	nav a {
+		@apply px-4 py-2;
+		line-height: 32px;
+	}
+
+	nav a:hover {
+		@apply underline underline-offset-2;
+		text-decoration-thickness: 2px;
 	}
 
 	footer h1 {
