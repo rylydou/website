@@ -21,6 +21,7 @@
 		"autoprefixer": "^10.4.14",
 		"postcss": "^8.4.23",
 		"postcss-easings": "^3.0.1",
+		"postcss-nesting": "^11.2.2",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"svelte-preprocess-import-assets": "^1.0.0",
@@ -30,8 +31,5 @@
 		"vite": "^4.3.0",
 		"vite-imagetools": "^4.0.19"
 	},
-	"type": "module",
-	"dependencies": {
-		"postcss-nesting": "^11.2.2"
-	}
+	"type": "module"
 }

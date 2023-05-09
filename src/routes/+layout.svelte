@@ -19,14 +19,6 @@
 	<title>Studio Art 2023 - Ryly Dou</title>
 </svelte:head>
 
-<!-- <a class="logo absolute md:fixed z-50 top-2 left-2" href="/">
-	{#if $title}
-		RD - {$title}
-	{:else}
-		RYLY DOU
-	{/if}
-</a> -->
-
 <nav class="md:absolute z-50 top-2 left-2 right-2 text-black font-bold flex flex-row">
 	<a class="logo" href="/">
 		{#if $title}
@@ -36,8 +28,9 @@
 		{/if}
 	</a>
 	<div class="w-2" />
-	<a href="/blog">Blog</a>
-	<a href="https://ciber-turtle.itch.io" target="_blank">Games</a>
+	<!-- <a href="/blog">Blog</a> -->
+	<a href="https://github.com/CiberTurtle" target="_blank">Github</a>
+	<a href="https://ciber-turtle.itch.io" target="_blank">Itch.io</a>
 </nav>
 
 <article>
@@ -51,7 +44,7 @@
 		<ul class="text-red-400">
 			<li><h1>Pages</h1></li>
 			<li><a href="/">Home</a></li>
-			<li><a href="/about">About</a></li>
+			<!-- <li><a href="/about">About</a></li> -->
 		</ul>
 		<ul class="text-yellow-400">
 			<li><h1>Works</h1></li>

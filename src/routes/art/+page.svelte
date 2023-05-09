@@ -224,3 +224,33 @@
 		<img src="./static/car-2.webp" />
 	</div>
 </section>
+
+<section>
+	<div class="prose">
+		<hr />
+
+		<strong>NOTE: Sorry if the rest is a bit rushed.</strong>
+
+		<img src="./static/parrot.webp" />
+
+		<p>
+			This is the pixel parrot. It is made to imitate how computer displays work. Each square is a
+			pixel which can be colored in with cyan, yellow, or magenta. Each color either exists or is
+			completely absent. It's binary, like computers! I made this by importing an image of a parrot
+			into GIMP and separating each color into separator layers.
+		</p>
+
+		<img src="./static/awakening-1.webp" />
+
+		<p
+			>The next project I made was a game that was heavily inspired form Link Awakening for the
+			GameBoy.</p
+		>
+
+		<img src="./static/awakening-map.webp" />
+
+		<p>And this is the map for the game.</p>
+
+		And the last project is this website!
+	</div>
+</section>
